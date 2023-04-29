@@ -1,6 +1,6 @@
 import { Container, HeaderBox, MenuBtnBox, SmallBox } from "./styles";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import HeaderBtn from "../../components/HeaderBtn";
+import HeaderBtn from "@components/HeaderBtn";
 import React from "react";
 import MenuBox from "./MenuBox";
 
