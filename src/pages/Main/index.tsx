@@ -1,15 +1,19 @@
-import { Container } from "./styles";
+import { Banner, Container } from "./styles";
 import { AnyMxRecord } from "dns";
 import React from "react";
+import Bulletin from "@components/ListItem";
 
 interface propsType {
   children: any;
 }
 
-const Main = (props: propsType) => {
+const Main = () => {
   return (
     <>
-      <Container>{props.children}</Container>
+      <Container>
+        <Banner>설명 문구</Banner>
+        <Bulletin />
+      </Container>
     </>
   );
 };

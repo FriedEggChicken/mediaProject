@@ -2,8 +2,11 @@ import { Box, styled } from "@mui/material";
 
 export const Container = styled(Box)((p) => ({
   width: "100%",
-  height: "150px",
-  position: "fixed",
+  height: "90px",
+  zIndex: 100,
+  position: "sticky",
+  top: 0,
+  backgroundColor: p.theme.palette.background.default,
 }));
 
 export const HeaderBox = styled(Box)((p) => ({
@@ -16,7 +19,6 @@ export const HeaderBox = styled(Box)((p) => ({
 export const SmallBox = styled(Box)((p) => ({
   width: "250px",
   height: "100%",
-  border: "0.5px solid gray",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",

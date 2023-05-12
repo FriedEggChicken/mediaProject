@@ -2,10 +2,10 @@ import React from "react";
 import Header from "@pages/Header";
 import Main from "@pages/Main";
 import { Box, styled } from "@mui/material";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 
 const HeaderSpace = styled(Box)((p) => ({
-  height: "160px",
+  height: "110px",
 }));
 
 const Body = styled(Box)((p) => ({
@@ -20,15 +20,10 @@ const Frame = () => {
   return (
     <>
       <Header />
-      <HeaderSpace />
+      {/* <HeaderSpace /> */}
 
       <Body>
-        <Routes>
-          <Route path="/" element={<Main>메인</Main>} />
-          <Route path="/notice" element={<Main>공지사항</Main>} />
-          <Route path="/board" element={<Main>게시판</Main>} />
-          <Route path="/review" element={<Main>이용 후기</Main>} />
-        </Routes>
+        <Outlet />
       </Body>
     </>
   );
