@@ -1,25 +1,30 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import Frame from './pages/Frame';
-import reportWebVitals from './reportWebVitals';
-import { theme, ThemeProvider, CssBaseline } from './Theme'
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import Frame from "@pages/Frame";
+import reportWebVitals from "./reportWebVitals";
+import { theme, ThemeProvider, CssBaseline } from "./Theme";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Main from "@pages/Main";
+import Notice from "@pages/Notice";
+import Board from "@pages/Board";
+import Review from "@pages/Review";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <CssBaseline/>
+      <CssBaseline />
       <Router>
         <Routes>
-          <Route path='/*' element={<Frame />} />
+          <Route path="/" element={<Frame />}>
+            <Route index element={<Main></Main>} />
+            <Route path="notice" element={<Notice>공지사항</Notice>} />
+            <Route path="board" element={<Board>게시판</Board>} />
+            <Route path="review" element={<Review>이용 후기</Review>} />
+          </Route>
         </Routes>
       </Router>
     </ThemeProvider>

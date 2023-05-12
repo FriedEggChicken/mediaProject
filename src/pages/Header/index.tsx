@@ -3,6 +3,8 @@ import { NavigateFunction, useNavigate } from "react-router-dom";
 import HeaderBtn from "@components/HeaderBtn";
 import React from "react";
 import MenuBox from "./MenuBox";
+import { Box, Button } from "@mui/material";
+import logoImg from "@images/logo_tmp.png";
 
 /**
  * 화면 상단 위치에 고정된 헤더
@@ -15,7 +17,31 @@ const Header = () => {
     <>
       <Container>
         <HeaderBox>
-          <SmallBox>🛵</SmallBox>
+          <SmallBox>
+            <Button
+              sx={{
+                "&:hover": {
+                  background: "none",
+                },
+              }}
+              onClick={() => navigate("/")}
+            >
+              <img alt="tmp_logo" src={logoImg} height="50px" />
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "start",
+                  alignItems: "start",
+                  ml: "0.35rem",
+                  fontWeight: 800,
+                }}
+              >
+                <span>동네</span>
+                <span>보따리</span>
+              </Box>
+            </Button>
+          </SmallBox>
           <MenuBtnBox>
             <HeaderBtn
               isClicked={pathname === "/notice"}
