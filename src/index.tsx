@@ -23,7 +23,7 @@ root.render(
             <Route index element={<Main></Main>} />
             <Route path="notice" element={<Notice>공지사항</Notice>} />
             <Route path="board" element={<Board>게시판</Board>} />
-            <Route path="review" element={<Review>이용 후기</Review>} />
+            <Route path="reviews" element={<Review>이용 후기</Review>} />
           </Route>
         </Routes>
       </Router>

@@ -4,7 +4,7 @@ export const Container = styled(Box)((p) => ({
   width: "100%",
   height: "90px",
   zIndex: 100,
-  position: "sticky",
+  // position: "sticky",
   top: 0,
   backgroundColor: p.theme.palette.background.default,
 }));

@@ -60,9 +60,9 @@ const Header = () => {
               게시판
             </HeaderBtn>
             <HeaderBtn
-              isClicked={pathname === "/review"}
+              isClicked={pathname === "/reviews"}
               handleClick={() => {
-                navigate("/review");
+                navigate("/reviews");
               }}
             >
               이용 후기
