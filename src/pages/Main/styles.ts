@@ -12,5 +12,16 @@ export const Banner = styled(Box)((p) => ({
   backgroundColor: p.theme.palette.secondary.dark,
   justifyContent: "center",
   alignItems: "center",
-  marginBottom: 20,
+  marginBottom: 30,
+}));
+
+export const ListBox = styled(Box)((p) => ({
+  width: "100%",
+  marginBottom: 30,
+}));
+
+export const ButtonArea = styled(Box)((p) => ({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
 }));
