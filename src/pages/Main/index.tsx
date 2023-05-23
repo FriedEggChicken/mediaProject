@@ -3,12 +3,15 @@ import { AnyMxRecord } from "dns";
 import React, { useState } from "react";
 import Bulletin from "@components/ListItem";
 import { Button, Grid, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 interface propsType {
   children: any;
 }
 
 const Main = () => {
+  const navigate = useNavigate();
+
   const [cards, setCards] = useState([0, 1, 2, 3]);
 
   return (
@@ -37,7 +40,14 @@ const Main = () => {
             ))}
           </Grid>
           <ButtonArea>
-            <Button sx={{ width: 120, borderRadius: 40 }} variant="contained">
+            <Button
+              onClick={() => {
+                window.scrollTo(0, 0);
+                navigate(`/board`);
+              }}
+              sx={{ width: 120, borderRadius: 40 }}
+              variant="contained"
+            >
               더보기
             </Button>
           </ButtonArea>

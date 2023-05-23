@@ -4,7 +4,7 @@ import React from "react";
 interface propsType {
   children: any;
   isClicked: boolean;
-  handleClick: () => void;
+  handleClick: (event: React.MouseEvent<HTMLElement>) => void;
 }
 const HeaderBtn = (props: propsType) => {
   return (

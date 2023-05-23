@@ -1,17 +1,49 @@
-import React, { useState } from "react";
-import { Box, Dialog, DialogTitle, DialogContent } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import {
+  Box,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  Menu,
+  Fade,
+  MenuItem,
+} from "@mui/material";
 import HeaderBtn from "@components/HeaderBtn";
 import KaKaoButtonImg from "@images/kakao_login_medium_wide.png";
-
-const REST_API_KEY = "dd6cf43c13cb95bebf844aa4be90db27";
-const REDIRECT_URI = "http://localhost:3000/oauth";
-const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+import { KAKAO_AUTH_URL } from "@utils/Constants";
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import axios from "axios";
+import Swal from "sweetalert2";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const MenuBox = () => {
-  // const [anchorE1, setAnchorE1] = useState<HTMLElement | null>(null);
-  const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
-  // const open: boolean = Boolean(anchorE1);
+  const navigate = useNavigate();
+  // const userCookie = useCookies(["userId"]);
 
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const menuOpen: boolean = Boolean(anchorEl);
+  const [isLogin, setIsLogin] = useState(false);
+  const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("token") != null) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+  }, []);
+
+  const menuClick = (event: React.MouseEvent<HTMLElement>) => {
+    if (isLogin) setAnchorEl(event.currentTarget);
+    else {
+      handleClick();
+    }
+  };
+
+  const menuClose = () => {
+    setAnchorEl(null);
+  };
   const handleClick: () => void = () => {
     setDialogOpen(true);
   };
@@ -22,14 +54,68 @@ const MenuBox = () => {
 
   return (
     <>
-      <HeaderBtn
-        isClicked={false}
-        handleClick={() => {
-          handleClick();
-        }}
+      {isLogin ? (
+        <HeaderBtn
+          isClicked={false}
+          handleClick={(event) => {
+            menuClick(event);
+          }}
+        >
+          <MenuIcon />
+        </HeaderBtn>
+      ) : (
+        <HeaderBtn
+          isClicked={false}
+          handleClick={() => {
+            handleClick();
+          }}
+        >
+          로그인
+        </HeaderBtn>
+      )}
+      <Menu
+        anchorEl={anchorEl}
+        open={menuOpen}
+        onClose={menuClose}
+        TransitionComponent={Fade}
       >
-        로그인
-      </HeaderBtn>
+        <MenuItem
+          onClick={() => {
+            navigate("/mypage");
+            menuClose();
+          }}
+        >
+          내 정보
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            navigate("/delivery");
+            menuClose();
+          }}
+        >
+          배달 현황
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            menuClose();
+            Swal.fire({
+              icon: "question",
+              title: "로그아웃",
+              text: "로그아웃 하시겠습니까?",
+              showCancelButton: true,
+              confirmButtonText: "네",
+              cancelButtonText: "아니요",
+            }).then((res) => {
+              if (res.isConfirmed) {
+                sessionStorage.clear();
+                window.location.replace("/");
+              }
+            });
+          }}
+        >
+          로그아웃
+        </MenuItem>
+      </Menu>
       <Dialog
         PaperProps={{
           style: {
