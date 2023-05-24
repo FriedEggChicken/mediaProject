@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, LinearProgress } from "@mui/material";
 // import { kakaoLogin } from "@utils/Api";
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
@@ -35,17 +35,20 @@ const Login = () => {
   }, [getKakaoToken]);
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        height: "500px",
-        justifyContent: "center",
-        alignItems: "center",
-        fontSize: 30,
-      }}
-    >
-      로그인 중입니다. 잠시만 기다려 주세요.
-    </Box>
+    <>
+      <Box
+        sx={{
+          display: "flex",
+          height: "400px",
+          justifyContent: "center",
+          alignItems: "center",
+          fontSize: 30,
+        }}
+      >
+        로그인 중입니다. 잠시만 기다려 주세요.
+      </Box>
+      <LinearProgress />
+    </>
   );
 };
 

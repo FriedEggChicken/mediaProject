@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Container,
   TopSearchBox,
@@ -34,7 +34,26 @@ interface propsType {
 }
 
 const Board = () => {
+  const getPostsData = useCallback(async () => {
+    await axios
+      .get("/api/posts?type=createdDate", {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        if (response.data) {
+          // console.log(response.data);
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
   useEffect(() => {
+    getPostsData();
     // axios
     //   .get("/api/posts")
     //   .then((response) => {
@@ -46,7 +65,7 @@ const Board = () => {
     //   .catch((e) => {
     //     console.log(e);
     //   });"
-  }, []);
+  }, [getPostsData]);
 
   const [region, setRegion] = useState("");
   const [town, setTown] = useState("");
