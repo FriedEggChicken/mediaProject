@@ -23,7 +23,6 @@ const MyPage = () => {
   const [nickname, setNickname] = useState("");
   const [money, setMoney] = useState(0);
   const [socialType, setSocialType] = useState("");
-  const [postData, setPostData] = useState([]);
 
   const getUserData = useCallback(async () => {
     await axios
@@ -42,55 +41,6 @@ const MyPage = () => {
       .catch((e) => {
         console.log(e);
       });
-  }, []);
-
-  const getUserPosts = useCallback(async () => {
-    await axios
-      .get("/api/users/posts", {
-        headers: {
-          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-        },
-      })
-      .then((response) => {
-        // console.log(response);
-        if (response.data) {
-          // console.log(response.data);
-          setPostData(response.data.pageData.content);
-          // console.log(postData);
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
-
-  const deleteUserPosts = useCallback(async (formid: number) => {
-    Swal.fire({
-      icon: "warning",
-      title: "게시글 삭제",
-      text: "삭제 하시겠습니까?",
-      showCancelButton: true,
-      confirmButtonText: "네",
-      cancelButtonText: "아니요",
-    }).then(async (res) => {
-      if (res.isConfirmed) {
-        await axios
-          .delete(`/api/posts/${formid}`, {
-            headers: {
-              Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-            },
-          })
-          .then((response) => {
-            console.log(response);
-            if (response.data.success === true) {
-              window.location.replace("/mypage");
-            }
-          })
-          .catch((e) => {
-            console.log(e);
-          });
-      }
-    });
   }, []);
 
   const handleNicknameChange = (event: any) => {
@@ -152,8 +102,7 @@ const MyPage = () => {
 
   useEffect(() => {
     getUserData();
-    getUserPosts();
-  }, [getUserData, getUserPosts]);
+  }, [getUserData]);
 
   return (
     <Container>
@@ -219,47 +168,26 @@ const MyPage = () => {
             탈퇴하기
           </Button>
         </ItemBox>
-        <Typography
-          sx={{ display: "flex", justifyContent: "center", mt: 5, mb: 4 }}
-          variant="h4"
-        >
-          내 게시글
-        </Typography>
-        <Grid
-          container
-          spacing={"55px"}
-          rowSpacing={"60px"}
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            mb: 5,
-          }}
-        >
-          {postData?.map((post: any, i: number) => (
-            <Grid item key={i}>
-              <Bulletin post={post}></Bulletin>
-              <IconButton
-                aria-label="delete"
-                size="large"
-                onClick={() => {
-                  deleteUserPosts(post.postId);
-                }}
-              >
-                <DeleteIcon fontSize="inherit" />
-              </IconButton>
-              <IconButton
-                aria-label="edit"
-                size="large"
-                onClick={() => {
-                  navigate(`/posts/edit/${post.postId}`);
-                }}
-              >
-                <EditIcon fontSize="inherit" />
-              </IconButton>
-            </Grid>
-          ))}
-        </Grid>
+        <ItemBox>
+          <Button
+            variant="contained"
+            onClick={() => {
+              navigate(`/mypage/myposts`);
+            }}
+            sx={{ width: 130, borderRadius: 3 }}
+          >
+            내 게시글 조회
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => {
+              navigate(`/mypage/myrequests`);
+            }}
+            sx={{ ml: 10, width: 130, borderRadius: 3 }}
+          >
+            내 신청서 조회
+          </Button>
+        </ItemBox>
       </FrameBox>
     </Container>
   );

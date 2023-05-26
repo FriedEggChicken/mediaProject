@@ -12,24 +12,24 @@ import tmpImg from "@images/logo_tmp.png";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 
-const SmallListItem = (post: any) => {
+const ListFormItem = (form: any) => {
   const navigate = useNavigate();
   const [timeAgo, setTimeAgo] = useState("");
 
   const {
-    arriveAddr,
-    arriveTime,
+    cancelPosition,
+    cancelReason,
     charge,
     content,
     createdDate,
-    endNum,
-    hopeNum,
+    formId,
+    isAccept,
+    isCancel,
     isEnd,
     postId,
-    title,
+    storeAddr,
     userId,
-    wayAddr,
-  } = post.post;
+  } = form.form;
 
   const caculateTime = useCallback(() => {
     const target = moment(createdDate);
@@ -54,18 +54,18 @@ const SmallListItem = (post: any) => {
 
   return (
     <>
-      <Card sx={Container} onClick={() => navigate(`/posts/${postId}`)}>
+      <Card sx={Container} onClick={() => navigate(`/forms/${formId}`)}>
         <Content>
           <CardContent sx={{ flex: "1 0 auto" }}>
             <Typography sx={{ mb: "1rem" }} variant="h6">
-              {title}
+              {content}
             </Typography>
             <Typography
               sx={{ mb: "1rem" }}
               variant="subtitle1"
               color="text.secondary"
             >
-              {wayAddr}
+              {storeAddr}
             </Typography>
             <Bottom>
               <Typography variant="subtitle1">{charge}원</Typography>
@@ -93,4 +93,4 @@ const SmallListItem = (post: any) => {
   );
 };
 
-export default SmallListItem;
+export default ListFormItem;

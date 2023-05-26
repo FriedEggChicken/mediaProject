@@ -12,7 +12,7 @@ export const Container = styled(Box)((p) => ({
 export const FrameBox = styled(Box)((p) => ({
   border: `1px solid ${p.theme.palette.secondary.dark}`,
   width: "700px",
-  height: "550px",
+  height: "750px",
 }));
 
 export const ItemBox = styled(Box)((p) => ({

@@ -6,14 +6,17 @@ import {
   TypoBox,
   BottomContentBox,
 } from "./styles";
-import { Typography, Box, Divider } from "@mui/material";
+import { Typography, Box, Divider, Button } from "@mui/material";
 import MapBox from "@components/MapBox";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import FormDialogs from "@components/dialogs/FormDialogs";
+import useDialog from "@hooks/useDialog";
 
 const Bulletin = () => {
   const params = useParams();
   const [data, setData] = useState<any>({});
+  const formDialogs = useDialog();
 
   const getPostData = useCallback(async () => {
     await axios
@@ -24,10 +27,37 @@ const Bulletin = () => {
       })
       .then((response) => {
         // console.log(response);
-        if (response.data) {
+        if (response.data.success === true) {
           // console.log(response.data);
           setData(response.data.data);
           // console.log(response.data);
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
+  const handleRequest = useCallback(async (values: Array<any>) => {
+    await axios
+      .post(
+        `/api/forms`,
+        {
+          charge: values[1],
+          content: values[2],
+          postId: params.id,
+          storeAddr: values[0],
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((response) => {
+        // console.log(response);
+        if (response.data.success === true) {
+          console.log("요청 성공");
         }
       })
       .catch((e) => {
@@ -115,6 +145,31 @@ const Bulletin = () => {
             <Typography variant="subtitle1" sx={{ ml: 2 }}>
               {data?.arriveTime}
             </Typography>
+          </TypoBox>
+          <TypoBox>
+            {data?.isWriter === false ? (
+              <>
+                <Button
+                  variant="contained"
+                  onClick={formDialogs.open}
+                  sx={{ mr: 2, ml: 1, width: 120, borderRadius: 3 }}
+                >
+                  신청서 작성
+                </Button>
+
+                <FormDialogs
+                  open={formDialogs.isOpen}
+                  onClose={formDialogs.close}
+                  title="신청서 작성"
+                  type="text"
+                  values={formDialogs.values}
+                  setValues={formDialogs.setValues}
+                  onEdit={handleRequest}
+                />
+              </>
+            ) : (
+              <></>
+            )}
           </TypoBox>
         </TopContentBox>
         <Box sx={{ display: "flex", justifyContent: "center" }}>

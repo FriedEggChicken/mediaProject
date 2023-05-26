@@ -15,6 +15,11 @@ import MyPage from "@pages/MyPage";
 import Delivery from "@pages/Delivery";
 import Bulletin from "@pages/Bulletin";
 import EditForm from "@pages/EditForm";
+import MyPosts from "@pages/MyPosts";
+import PostForms from "@pages/PostForms";
+import FormsDetail from "@pages/FormsDetail";
+import MyRequests from "@pages/MyRequests";
+import EditRequestForm from "@pages/EditRequestForm";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -35,6 +40,11 @@ root.render(
           <Route path="posts/edit/:id" element={<EditForm></EditForm>} />
           <Route path="reviews" element={<Review></Review>} />
           <Route path="mypage" element={<MyPage />} />
+          <Route path="mypage/myposts" element={<MyPosts />} />
+          <Route path="mypage/myrequests" element={<MyRequests />} />
+          <Route path="forms/edit/:id" element={<EditRequestForm />} />
+          <Route path="posts/forms/:id" element={<PostForms />} />
+          <Route path="forms/:id" element={<FormsDetail />} />
           <Route path="delivery" element={<Delivery />} />
         </Route>
       </Routes>
