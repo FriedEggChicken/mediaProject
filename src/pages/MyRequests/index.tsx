@@ -151,7 +151,7 @@ const MyRequests = () => {
         await axios
           .post(
             `/api/deliveries/${formId}/cancel-acceptance`,
-            { isAccept: false },
+            { isAccept: true },
             {
               headers: {
                 Authorization: `Bearer ${sessionStorage.getItem("token")}`,
@@ -272,6 +272,16 @@ const MyRequests = () => {
                           height: "50px",
                         }}
                       >
+                        <Typography
+                          sx={{
+                            // color: "secondary.dark",
+                            fontWeight: "bold",
+                            pr: 2,
+                          }}
+                          variant="subtitle1"
+                        >
+                          수락 대기
+                        </Typography>
                         <Tooltip title="삭제" placement="top">
                           <IconButton
                             aria-label="delete"
@@ -296,27 +306,7 @@ const MyRequests = () => {
                         </Tooltip>
                       </Box>
                     </>
-                  ) : form.isEnd === true ? (
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "end",
-                        alignItems: "center",
-                        height: "50px",
-                      }}
-                    >
-                      <Typography
-                        sx={{
-                          // color: "secondary.dark",
-                          fontWeight: "bold",
-                          pr: 2,
-                        }}
-                        variant="subtitle1"
-                      >
-                        거래 완료
-                      </Typography>
-                    </Box>
-                  ) : form.isCancel && !form.isAccept ? (
+                  ) : form.isEnd && form.isCancel && form.isAccept ? (
                     <Box
                       sx={{
                         display: "flex",
@@ -334,6 +324,26 @@ const MyRequests = () => {
                         variant="subtitle1"
                       >
                         파기 완료
+                      </Typography>
+                    </Box>
+                  ) : form.isEnd ? (
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "end",
+                        alignItems: "center",
+                        height: "50px",
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          // color: "secondary.dark",
+                          fontWeight: "bold",
+                          pr: 2,
+                        }}
+                        variant="subtitle1"
+                      >
+                        거래 완료
                       </Typography>
                     </Box>
                   ) : form.isCancel ? (
@@ -387,7 +397,7 @@ const MyRequests = () => {
                       height: "50px",
                     }}
                   >
-                    {form.isEnd ? (
+                    {form.isEnd && !form.isCancel ? (
                       <>
                         <Button
                           variant="contained"
@@ -416,7 +426,9 @@ const MyRequests = () => {
                           onEdit={handleReviewRequest}
                         />
                       </>
-                    ) : form.isCancel && form.cancelPosition === "DELIVERER" ? (
+                    ) : form.isCancel &&
+                      !form.isAccept &&
+                      form.cancelPosition === "DELIVERER" ? (
                       <>
                         <Button
                           variant="contained"

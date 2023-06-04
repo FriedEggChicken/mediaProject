@@ -24,7 +24,7 @@ const FormsDetail = () => {
         },
       })
       .then((response) => {
-        // console.log(response);
+        console.log(response);
         if (response.data.success === true) {
           // console.log(response.data);
           setData(response.data.data);
@@ -66,10 +66,10 @@ const FormsDetail = () => {
                   거래 상태
                 </Typography>
                 <Typography sx={{ ml: 2 }} variant="subtitle1">
-                  {data?.isEnd
+                  {data?.isEnd && !data?.isCancel
                     ? "거래완료"
-                    : data?.isCancel
-                    ? "파기"
+                    : data?.isCancel && data?.isCancel && data?.isAccept
+                    ? "파기완료"
                     : !data?.isAccept
                     ? "신청서 확인중"
                     : "거래중"}

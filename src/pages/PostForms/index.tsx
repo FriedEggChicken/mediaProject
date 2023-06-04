@@ -90,7 +90,7 @@ const PostForms = () => {
         await axios
           .post(
             `/api/deliveries/${formid}/cancel-acceptance`,
-            { isAccept: "false" },
+            { isAccept: "true" },
             {
               headers: {
                 Authorization: `Bearer ${sessionStorage.getItem("token")}`,
@@ -172,6 +172,16 @@ const PostForms = () => {
                           height: "50px",
                         }}
                       >
+                        <Typography
+                          sx={{
+                            // color: "secondary.dark",
+                            fontWeight: "bold",
+                            pr: 2,
+                          }}
+                          variant="subtitle1"
+                        >
+                          대행 신청
+                        </Typography>
                         <Tooltip title="수락" placement="top">
                           <IconButton
                             aria-label="accept"
@@ -185,6 +195,26 @@ const PostForms = () => {
                         </Tooltip>
                       </Box>
                     </>
+                  ) : form.isEnd && form.isCancel && form.isAccept ? (
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "end",
+                        alignItems: "center",
+                        height: "50px",
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          // color: "secondary.dark",
+                          fontWeight: "bold",
+                          pr: 2,
+                        }}
+                        variant="subtitle1"
+                      >
+                        파기 완료
+                      </Typography>
+                    </Box>
                   ) : form.isEnd ? (
                     <Box
                       sx={{
@@ -203,26 +233,6 @@ const PostForms = () => {
                         variant="subtitle1"
                       >
                         거래 완료
-                      </Typography>
-                    </Box>
-                  ) : form.isCancel && !form.isAccept ? (
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "end",
-                        alignItems: "center",
-                        height: "50px",
-                      }}
-                    >
-                      <Typography
-                        sx={{
-                          // color: "secondary.dark",
-                          fontWeight: "bold",
-                          pr: 2,
-                        }}
-                        variant="subtitle1"
-                      >
-                        파기 완료
                       </Typography>
                     </Box>
                   ) : form.isCancel ? (
@@ -276,7 +286,9 @@ const PostForms = () => {
                       height: "50px",
                     }}
                   >
-                    {form.isCancel && form.cancelPosition === "CONSUMER" ? (
+                    {form.isCancel &&
+                    !form.isAccept &&
+                    form.cancelPosition === "CONSUMER" ? (
                       <>
                         <Button
                           variant="contained"

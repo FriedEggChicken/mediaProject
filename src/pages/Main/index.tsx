@@ -250,8 +250,8 @@ const Main = () => {
               }}
             >
               {postData
-                ?.slice(0, 6)
-                .reverse()
+                ?.reverse()
+                .slice(0, 6)
                 .map((post: any, i: number) => (
                   <Grid item key={i}>
                     <Bulletin post={post} />
