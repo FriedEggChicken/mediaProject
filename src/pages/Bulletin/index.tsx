@@ -106,7 +106,7 @@ const Bulletin = () => {
                   거래 상태
                 </Typography>
                 <Typography sx={{ ml: 2 }} variant="subtitle1">
-                  {data?.isEnd ? "거래완료" : "거래중"}
+                  {data?.isEnd ? "거래완료" : "신청서 접수중"}
                 </Typography>
               </TypoBox>
               <TypoBox sx={{ alignItems: "center" }}>
