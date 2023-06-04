@@ -11,7 +11,7 @@ import Board from "@pages/Board";
 import Review from "@pages/Review";
 import Login from "@pages/Login";
 import Forms from "@pages/Forms";
-import MyPage from "@pages/MyPage";
+// import MyPage from "@pages/MyPage";
 import Delivery from "@pages/Delivery";
 import Bulletin from "@pages/Bulletin";
 import EditForm from "@pages/EditForm";
@@ -20,6 +20,10 @@ import PostForms from "@pages/PostForms";
 import FormsDetail from "@pages/FormsDetail";
 import MyRequests from "@pages/MyRequests";
 import EditRequestForm from "@pages/EditRequestForm";
+import Consume from "@pages/Consume";
+import NoticeDetail from "@pages/NoticeDetail";
+import MyReviews from "@pages/MyReviews";
+import ErrorPage from "@pages/ErrorPage";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -34,18 +38,22 @@ root.render(
         <Route path="/" element={<Frame />}>
           <Route index element={<Main></Main>} />
           <Route path="notice" element={<Notice></Notice>} />
+          <Route path="notice/:id" element={<NoticeDetail />} />
           <Route path="board" element={<Board></Board>} />
           <Route path="posts/:id" element={<Bulletin></Bulletin>} />
           <Route path="forms" element={<Forms></Forms>} />
           <Route path="posts/edit/:id" element={<EditForm></EditForm>} />
-          <Route path="reviews" element={<Review></Review>} />
-          <Route path="mypage" element={<MyPage />} />
-          <Route path="mypage/myposts" element={<MyPosts />} />
-          <Route path="mypage/myrequests" element={<MyRequests />} />
+          <Route path="reviews/:id" element={<Review></Review>} />
+          {/* <Route path="mypage" element={<MyPage />} /> */}
+          <Route path="myposts" element={<MyPosts />} />
+          <Route path="myrequests" element={<MyRequests />} />
+          <Route path="myreviews" element={<MyReviews />} />
           <Route path="forms/edit/:id" element={<EditRequestForm />} />
           <Route path="posts/forms/:id" element={<PostForms />} />
           <Route path="forms/:id" element={<FormsDetail />} />
           <Route path="delivery" element={<Delivery />} />
+          <Route path="consumer" element={<Consume />} />
+          <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>
     </Router>

@@ -3,7 +3,7 @@ import { Box, styled } from "@mui/material";
 export const Container = styled(Box)((p) => ({
   marginTop: "30px",
   width: "100%",
-  height: "1500px",
+  height: "1400px",
   display: "flex",
   justifyContent: "center",
 }));
@@ -11,11 +11,25 @@ export const Container = styled(Box)((p) => ({
 export const FrameBox = styled(Box)((p) => ({
   border: `1px solid ${p.theme.palette.secondary.dark}`,
   width: "1000px",
-  height: "1000px",
+  height: "1300px",
 }));
 
 export const TopContentBox = styled(Box)((p) => ({
-  marginTop: "35px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+export const TypoContent = styled(Box)((p) => ({
+  backgroundColor: p.theme.palette.secondary.main,
+  border: "1px solid",
+  borderColor: p.theme.palette.secondary.dark,
+  borderRadius: "10px",
+  marginTop: "25px",
+  width: "800px",
+  height: "280px",
+  display: "flex",
+  paddingLeft: "15px",
 }));
 
 export const TypoBox = styled(Box)((p) => ({
@@ -24,10 +38,9 @@ export const TypoBox = styled(Box)((p) => ({
 }));
 
 export const BottomContentBox = styled(Box)((p) => ({
-  marginTop: "35px",
-  width: "800px",
-  height: "360px",
-  backgroundColor: p.theme.palette.secondary.main,
-  border: p.theme.palette.secondary.dark,
-  borderRadius: "20px",
+  lineHeight: "25px",
+  paddingLeft: "10px",
+  paddingTop: "15px",
+  overflowWrap: "break-word",
+  flex: "1",
 }));

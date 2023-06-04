@@ -31,3 +31,10 @@ export const MenuBtnBox = styled(Box)((p) => ({
   justifyContent: "flex-end",
   alignItems: "center",
 }));
+
+export const ItemBox = styled(Box)((p) => ({
+  display: "flex",
+  justifyContent: "start",
+  alignItems: "center",
+  marginBottom: 20,
+}));

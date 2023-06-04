@@ -7,18 +7,7 @@ import {
   PageBox,
 } from "./styles";
 import {
-  FormControl,
-  Grid,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  MenuItem,
-  OutlinedInput,
-  Select,
-  SelectChangeEvent,
-  TextField,
   Typography,
-  Button,
   Pagination,
   Table,
   TableBody,
@@ -26,10 +15,8 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import Bulletin from "@components/ListItem";
+
 import { useNavigate } from "react-router-dom";
 import usePagination from "@hooks/usePagination";
 interface propsType {
@@ -37,35 +24,34 @@ interface propsType {
 }
 interface RowData {
   name: string;
-  calories: number;
-  fat: number;
-  carbs: number;
-  protein: number;
+  date: string;
+  content: string;
+  num: number;
+  idx: number;
 }
+
 const Notice = () => {
   const [region, setRegion] = useState("");
   const [town, setTown] = useState("");
   const [sortValue, setSortValue] = useState("new");
   const createData = (
     name: string,
-    calories: number,
-    fat: number,
-    carbs: number,
-    protein: number
-  ) => ({ name, calories, fat, carbs, protein });
+    date: string,
+    content: string,
+    num: number,
+    idx: number
+  ) => ({ name, date, content, num, idx });
 
   const rows = [
-    createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-    createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-    createData("Eclair", 262, 16.0, 24, 6.0),
-    createData("Cupcake", 305, 3.7, 67, 4.3),
-    createData("Gingerbread", 356, 16.0, 49, 3.9),
-    createData("f", 305, 3.7, 67, 4.3),
-    createData("e", 356, 16.0, 49, 3.9),
-    createData("d", 305, 3.7, 67, 4.3),
-    createData("c", 356, 16.0, 49, 3.9),
-    createData("b", 305, 3.7, 67, 4.3),
-    createData("a", 356, 16.0, 49, 3.9),
+    createData("파기 관련 내용 안내", "2023-05-27", "hello", 24, 3),
+    createData("수수료 안내", "2023-05-26", "hello", 37, 2),
+    createData(
+      "동네 보따리에 오신 것을 환영합니다!",
+      "2023-05-25",
+      "hello",
+      24,
+      1
+    ),
   ];
   const [page, setPage] = useState(1);
 
@@ -88,63 +74,47 @@ const Notice = () => {
 
   return (
     <Container>
-      <TopSearchBox>
-        <FormControl sx={{ width: "350px" }} variant="outlined">
-          <OutlinedInput
-            sx={{
-              "&.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                {
-                  borderColor: "transparent",
-                },
-              backgroundColor: "secondary.main",
-              borderRadius: 5,
-              height: 40,
-              pl: 2,
-            }}
-            id="search"
-            placeholder="검색"
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton aria-label="search_button" edge="end">
-                  <SearchIcon />
-                </IconButton>
-              </InputAdornment>
-            }
-            aria-describedby="outlined-search-helper-text"
-            inputProps={{
-              "aria-label": "search",
-            }}
-          />
-        </FormControl>
-      </TopSearchBox>
+      <TopSearchBox></TopSearchBox>
       <SmallConditionBox>
-        <Typography>총 123건</Typography>
+        <Typography sx={{ ml: 1 }} fontSize={18} fontWeight={600}>
+          총 {rows.length}건
+        </Typography>
       </SmallConditionBox>
       <ListBox>
-        <TableContainer
-          sx={{ backgroundColor: "background.default" }}
-          component={Paper}
-        >
+        <TableContainer sx={{ backgroundColor: "background.default" }}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>제목</TableCell>
-                <TableCell align="right">작성일</TableCell>
-                <TableCell align="right">조회수</TableCell>
+                <TableCell
+                  sx={{ fontWeight: "bold", fontSize: 15 }}
+                  align="center"
+                >
+                  제목
+                </TableCell>
+                <TableCell
+                  sx={{ fontWeight: "bold", fontSize: 15 }}
+                  align="center"
+                >
+                  작성일
+                </TableCell>
+                {/* <TableCell align="center">조회수</TableCell> */}
               </TableRow>
             </TableHead>
             <TableBody>
               {_data.currentData()?.map((row: RowData) => (
                 <TableRow
                   key={row.name}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  onClick={() => navigate(`/posts/${row.name}`)}
+                  sx={{
+                    "&:last-child td, &:last-child th": { border: 0 },
+                    cursor: "pointer",
+                  }}
+                  onClick={() => navigate(`/notice/${row.idx}`)}
                 >
-                  <TableCell component="th" scope="row">
+                  <TableCell component="th" scope="row" align="center">
                     {row.name}
                   </TableCell>
-                  <TableCell align="right">{row.calories}</TableCell>
-                  <TableCell align="right">{row.fat}</TableCell>
+                  <TableCell align="center">{row.date}</TableCell>
+                  {/* <TableCell align="center">{row.num}</TableCell> */}
                 </TableRow>
               ))}
             </TableBody>

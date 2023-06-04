@@ -1,11 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import {
   FormControl,
-  Grid,
-  IconButton,
   InputAdornment,
-  InputLabel,
-  MenuItem,
   OutlinedInput,
   TextField,
   Typography,
@@ -44,7 +40,7 @@ const EditRequestForm = () => {
       .then((response) => {
         // console.log(response);
         if (response.data.success === true) {
-          window.location.replace("/mypage/myrequests");
+          window.location.replace("/myrequests");
           console.log(response);
         }
       })
@@ -100,121 +96,137 @@ const EditRequestForm = () => {
 
   return (
     <Container>
+      <Typography
+        sx={{ textAlign: "center", mb: 5 }}
+        variant="h5"
+        fontWeight={500}
+      >
+        신청서 수정
+      </Typography>
       <Box
         sx={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          mb: 7,
         }}
+        component="form"
+        onSubmit={handleSubmit}
       >
-        <Typography variant="h5">신청서 수정</Typography>
-      </Box>
-      <Box component="form" onSubmit={handleSubmit}>
-        <InputBox>
-          <Typography sx={{ mr: 2 }} variant="button">
-            주소
-          </Typography>
-          <FormControl sx={{ width: "350px" }} variant="outlined" required>
-            <OutlinedInput
-              sx={{
-                "&.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                  {
-                    borderColor: "transparent",
-                  },
-                backgroundColor: "secondary.main",
-                borderRadius: 2,
-                height: 40,
-              }}
-              id="wayaddress"
-              aria-describedby="outlined-address-helper-text"
-              inputProps={{
-                "aria-label": "wayaddress",
-              }}
-              value={storeAddr}
-            />
-          </FormControl>
-          <Button
-            variant="contained"
-            onClick={handleA.Open}
-            sx={{ mr: 2, ml: 1, width: 90, borderRadius: 3 }}
-          >
-            검색
-          </Button>
-          <Modal open={openPostcodeA} onClose={handleA.Close}>
-            <Box
-              sx={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                width: 600,
-                p: 4,
-              }}
-            >
-              <DaumPostcodeEmbed
-                onComplete={handleA.selectAddress}
-                autoClose={false}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "start",
+            alignItems: "start",
+          }}
+        >
+          <InputBox>
+            <Typography sx={{ mr: 2 }} variant="button">
+              주소
+            </Typography>
+            <FormControl sx={{ width: "350px" }} variant="outlined" required>
+              <OutlinedInput
+                sx={{
+                  "&.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: "transparent",
+                    },
+                  backgroundColor: "secondary.main",
+                  borderRadius: 2,
+                  height: 40,
+                }}
+                id="wayaddress"
+                aria-describedby="outlined-address-helper-text"
+                inputProps={{
+                  "aria-label": "wayaddress",
+                }}
+                value={storeAddr}
               />
-            </Box>
-          </Modal>
-        </InputBox>
-        <InputBox sx={{ alignItems: "start" }}>
-          <Typography sx={{ mr: 2 }} variant="button">
-            내용
-          </Typography>
-          <FormControl sx={{ width: "350px" }} variant="outlined" required>
-            <OutlinedInput
-              sx={{
-                "&.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                  {
-                    borderColor: "transparent",
-                  },
-                backgroundColor: "secondary.main",
-                borderRadius: 2,
+            </FormControl>
+            <Button
+              variant="contained"
+              onClick={handleA.Open}
+              sx={{ mr: 2, ml: 1, width: 90, borderRadius: 3 }}
+            >
+              검색
+            </Button>
+            <Modal open={openPostcodeA} onClose={handleA.Close}>
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  width: 600,
+                  p: 4,
+                }}
+              >
+                <DaumPostcodeEmbed
+                  onComplete={handleA.selectAddress}
+                  autoClose={false}
+                />
+              </Box>
+            </Modal>
+          </InputBox>
+          <InputBox sx={{ alignItems: "start" }}>
+            <Typography sx={{ mr: 2 }} variant="button">
+              내용
+            </Typography>
+            <FormControl sx={{ width: "350px" }} variant="outlined" required>
+              <OutlinedInput
+                sx={{
+                  "&.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: "transparent",
+                    },
+                  backgroundColor: "secondary.main",
+                  borderRadius: 2,
+                }}
+                id="content"
+                aria-describedby="outlined-content-helper-text"
+                inputProps={{
+                  "aria-label": "content",
+                }}
+                multiline
+                rows={10}
+                value={content}
+                onChange={(e) => {
+                  setContent(e.target.value);
+                }}
+              />
+            </FormControl>
+          </InputBox>
+          <InputBox>
+            <Typography sx={{ mr: 1 }} variant="button">
+              수고비&nbsp;
+            </Typography>
+            <TextField
+              required
+              sx={{ width: "100px" }}
+              variant="standard"
+              name="costs"
+              type="number"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">원</InputAdornment>
+                ),
               }}
-              id="content"
-              aria-describedby="outlined-content-helper-text"
-              inputProps={{
-                "aria-label": "content",
-              }}
-              multiline
-              rows={10}
-              value={content}
+              value={charge}
               onChange={(e) => {
-                setContent(e.target.value);
+                setCharge(Number(e.target.value));
               }}
             />
-          </FormControl>
-        </InputBox>
-        <InputBox>
-          <Typography sx={{ mr: 2 }} variant="button">
-            수고비
-          </Typography>
-          <TextField
-            required
-            variant="standard"
-            size="small"
-            name="costs"
-            type="number"
-            InputProps={{
-              endAdornment: <InputAdornment position="end">원</InputAdornment>,
-            }}
-            value={charge}
-            onChange={(e) => {
-              setCharge(Number(e.target.value));
-            }}
-          />
-        </InputBox>
-        <InputBox>
-          <Button
-            type="submit"
-            sx={{ width: 120, borderRadius: 2 }}
-            variant="contained"
-          >
-            수정
-          </Button>
-        </InputBox>
+          </InputBox>
+          <InputBox sx={{ ml: 23 }}>
+            <Button
+              type="submit"
+              sx={{ width: 120, borderRadius: 2 }}
+              variant="contained"
+            >
+              수정
+            </Button>
+          </InputBox>
+        </Box>
       </Box>
     </Container>
   );

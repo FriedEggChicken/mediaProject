@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Card,
-  CardMedia,
-  CardContent,
-  Rating,
-  Box,
-  Typography,
-} from "@mui/material";
+import { Card, CardMedia, CardContent, Typography } from "@mui/material";
 import { Bottom, Container, Content, Picture } from "./styles";
 import tmpImg from "@images/logo_tmp.png";
 import { useNavigate } from "react-router-dom";
@@ -46,19 +39,6 @@ const ListItem = () => {
           </CardContent>
         </Content>
       </Card>
-      {/* <Container>
-        <Picture>
-          <img alt="tmp_img" src={tmpImg} width="50%" height="50%" />
-        </Picture>
-        <Content>
-          <Medium>심부름 대행합니다.</Medium>
-          <Light>충남 천안시 동남구</Light>
-          <Bottom>
-            <Medium>5000원</Medium>
-            <Light sx={{ ml: "160px" }}>12분 전</Light>
-          </Bottom>
-        </Content>
-      </Container> */}
     </>
   );
 };

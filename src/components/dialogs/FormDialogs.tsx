@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Typography,
   TextField,
   Modal,
   Dialog,
@@ -13,7 +12,7 @@ import {
   OutlinedInput,
   InputAdornment,
 } from "@mui/material";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import { ModalBox, DialogBox } from "./styles";
 
@@ -27,8 +26,6 @@ const FormDialogs = ({
 }: any) => {
   const [address, setAddress] = useState("");
   const [openPostCode, setOpenPostCode] = useState(false);
-  //   const [charge, setCharge] = useState(3000);
-  //   const [content, setContent] = useState("");
   const [alert, setAlert] = useState("");
   const handle = {
     Open: () => {
@@ -63,7 +60,7 @@ const FormDialogs = ({
 
   const handleEditClick = useCallback(() => {
     if (!address || !values[2]) {
-      setAlert("모든 정보를 입력해주세요.");
+      setAlert("모든 항목을 입력해주세요.");
       return;
     }
     onEdit(values);
@@ -103,6 +100,7 @@ const FormDialogs = ({
             </Modal>
             <TextField
               required
+              sx={{ width: "260px" }}
               variant="standard"
               name="address"
               InputProps={{
@@ -112,9 +110,10 @@ const FormDialogs = ({
             />
           </Box>
           <Box sx={{ display: "flex", alignItems: "flex-end", mt: 4 }}>
-            수고비 &nbsp;
+            대행비 &nbsp;
             <TextField
               required
+              sx={{ width: "100px" }}
               variant="standard"
               size="small"
               name="costs"
@@ -127,9 +126,9 @@ const FormDialogs = ({
               onChange={handleChargeChange}
             />
           </Box>
-          <Box sx={{ display: "flex", alignItems: "flex-end", mt: 4 }}>
+          <Box sx={{ display: "flex", alignItems: "start", mt: 4 }}>
             내용 &nbsp;
-            <FormControl sx={{ width: "350px" }} variant="outlined" required>
+            <FormControl sx={{ width: "370px" }} variant="outlined" required>
               <OutlinedInput
                 sx={{
                   "&.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
@@ -138,7 +137,6 @@ const FormDialogs = ({
                     },
                   backgroundColor: "secondary.main",
                   borderRadius: 2,
-                  height: 40,
                 }}
                 id="content"
                 aria-describedby="outlined-content-helper-text"
@@ -146,6 +144,8 @@ const FormDialogs = ({
                   "aria-label": "content",
                 }}
                 onChange={handleContentChange}
+                multiline
+                rows={5}
               />
             </FormControl>
           </Box>
@@ -155,7 +155,11 @@ const FormDialogs = ({
             </Alert>
           )}
         </DialogContent>
-        <DialogActions>
+        <DialogActions
+          sx={{
+            justifyContent: "center",
+          }}
+        >
           <Button onClick={handleEditClick}>신청</Button>
           <Button onClick={handleClose}>취소</Button>
         </DialogActions>

@@ -14,6 +14,10 @@ const theme = createTheme({
       dark: "#E6E0D8",
     },
   },
+  typography: {
+    fontFamily: "SCDream4",
+    fontWeightLight: 200,
+  },
 });
 
 export { theme, ThemeProvider, CssBaseline };

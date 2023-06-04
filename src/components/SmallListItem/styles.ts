@@ -1,17 +1,13 @@
 import { Box, styled } from "@mui/material";
 
 export const Container = {
-  // boxSizing: "border-box",
-  width: "300px",
-  height: "160px",
+  width: "350px",
+
   backgroundColor: "secondary.main",
-  border: "14px",
-  borderColor: "secondary.dark",
   borderRadius: "10px",
   display: "flex",
   ":hover": {
-    transform: "translate(0, -8px)",
-    // boxShadow: "0 10px 6px",
+    boxShadow: "0 10px 10px rgba(0, 0, 0, 0.3)",
   },
 };
 
@@ -24,19 +20,10 @@ export const Picture = styled(Box)((p) => ({
 
 export const Content = styled(Box)((p) => ({
   display: "flex",
-  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
 }));
 
-export const Bottom = styled(Box)((p) => ({
+export const TypoBox = styled(Box)((p) => ({
   display: "flex",
 }));
-
-// export const Medium = styled(Box)((p) => ({
-//   // lineHeight: "5px",
-//   // alignItems: "center",
-// }));
-
-// export const Light = styled(Box)((p) => ({
-//   fontWeight: "lighter",
-//   color: p.theme.palette.primary.light,
-// }));

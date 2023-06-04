@@ -1,7 +1,6 @@
 import { Box, styled } from "@mui/material";
 
 export const Container = {
-  // boxSizing: "border-box",
   width: "516px",
   height: "160px",
   backgroundColor: "secondary.main",
@@ -29,13 +28,3 @@ export const Content = styled(Box)((p) => ({
 export const Bottom = styled(Box)((p) => ({
   display: "flex",
 }));
-
-// export const Medium = styled(Box)((p) => ({
-//   // lineHeight: "5px",
-//   // alignItems: "center",
-// }));
-
-// export const Light = styled(Box)((p) => ({
-//   fontWeight: "lighter",
-//   color: p.theme.palette.primary.light,
-// }));

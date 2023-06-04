@@ -5,10 +5,8 @@ import React from "react";
 import MenuBox from "./MenuBox";
 import { Box, Button } from "@mui/material";
 import logoImg from "@images/logo_tmp.png";
+import Swal from "sweetalert2";
 
-/**
- * 화면 상단 위치에 고정된 헤더
- */
 const Header = () => {
   const pathname: string = window.location.pathname;
   const navigate: NavigateFunction = useNavigate();
@@ -54,19 +52,27 @@ const Header = () => {
             <HeaderBtn
               isClicked={pathname === "/board"}
               handleClick={() => {
-                navigate("/board");
+                if (sessionStorage.getItem("token") !== null) {
+                  navigate("/board");
+                } else {
+                  Swal.fire({
+                    icon: "info",
+                    title: "로그인 후 이용할 수 있습니다.",
+                    confirmButtonText: "네",
+                  });
+                }
               }}
             >
               게시판
             </HeaderBtn>
-            <HeaderBtn
+            {/* <HeaderBtn
               isClicked={pathname === "/reviews"}
               handleClick={() => {
                 navigate("/reviews");
               }}
             >
               이용 후기
-            </HeaderBtn>
+            </HeaderBtn> */}
             <MenuBox />
           </MenuBtnBox>
         </HeaderBox>

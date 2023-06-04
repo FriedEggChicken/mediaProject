@@ -1,4 +1,3 @@
-import { styled, Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Container, NotFoundBox } from "./styles";
 
@@ -48,7 +47,7 @@ const MapBox = (address: any) => {
 
         map.setCenter(coords);
       } else {
-        console.log(`주소 검색 실패: ${fullAddress}`);
+        // console.log(`주소 검색 실패: ${fullAddress}`);
         setValidAddress(false);
       }
     });

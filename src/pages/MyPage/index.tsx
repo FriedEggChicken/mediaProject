@@ -1,20 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState, useCallback } from "react";
 import { Container, FrameBox, ItemBox } from "./styles";
-import {
-  Typography,
-  Box,
-  FormControl,
-  OutlinedInput,
-  TextField,
-  Button,
-  Grid,
-  IconButton,
-} from "@mui/material";
+import { Typography, FormControl, OutlinedInput, Button } from "@mui/material";
 import Swal from "sweetalert2";
-import Bulletin from "@components/SmallListItem";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
+
 import { useNavigate } from "react-router-dom";
 
 const MyPage = () => {
@@ -59,7 +48,7 @@ const MyPage = () => {
         }
       )
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         window.location.replace("/mypage");
       })
       .catch((e) => {

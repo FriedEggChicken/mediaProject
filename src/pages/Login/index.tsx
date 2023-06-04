@@ -1,7 +1,7 @@
 import { Box, LinearProgress } from "@mui/material";
 // import { kakaoLogin } from "@utils/Api";
 import axios from "axios";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {

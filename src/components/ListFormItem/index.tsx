@@ -1,13 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
-import {
-  Card,
-  CardMedia,
-  CardContent,
-  Rating,
-  Box,
-  Typography,
-} from "@mui/material";
-import { Bottom, Container, Content, Picture } from "./styles";
+import { Card, CardContent, Box, Typography } from "@mui/material";
+import { Bottom, Container, Content, Picture, TypoBox } from "./styles";
 import tmpImg from "@images/logo_tmp.png";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
@@ -34,8 +27,7 @@ const ListFormItem = (form: any) => {
   const caculateTime = useCallback(() => {
     const target = moment(createdDate);
     const current = moment();
-    // console.log(current);
-    // console.log(target);
+
     const diffminute = current.diff(target, "minutes");
     const diffhours = current.diff(target, "hours");
     const diffdays = current.diff(target, "days");
@@ -54,41 +46,52 @@ const ListFormItem = (form: any) => {
 
   return (
     <>
-      <Card sx={Container} onClick={() => navigate(`/forms/${formId}`)}>
+      <Box
+        sx={{
+          border: "1px solid",
+          borderColor: "secondary.dark",
+          borderRadius: "10px",
+        }}
+      >
         <Content>
-          <CardContent sx={{ flex: "1 0 auto" }}>
-            <Typography sx={{ mb: "1rem" }} variant="h6">
-              {content}
-            </Typography>
-            <Typography
-              sx={{ mb: "1rem" }}
-              variant="subtitle1"
-              color="text.secondary"
-            >
-              {storeAddr}
-            </Typography>
-            <Bottom>
-              <Typography variant="subtitle1">{charge}원</Typography>
-              <Typography variant="subtitle1" color="text.secondary" ml={20}>
-                {timeAgo}
+          <Card sx={Container} onClick={() => navigate(`/forms/${formId}`)}>
+            <CardContent sx={{ flex: "1 0 auto" }}>
+              {/* <Typography
+                sx={{ mb: "1rem", textAlign: "center", fontWeight: 550 }}
+                variant="h6"
+              >
+                {content}
+              </Typography> */}
+              <TypoBox>
+                <Typography sx={{ fontWeight: "bold" }} variant="subtitle1">
+                  도착
+                </Typography>
+              </TypoBox>
+              <Typography
+                sx={{ mb: "1rem" }}
+                variant="subtitle2"
+                color="text.secondary"
+              >
+                {storeAddr}
               </Typography>
-            </Bottom>
-          </CardContent>
+              <TypoBox>
+                <TypoBox sx={{ width: "250px" }}>
+                  <Typography
+                    sx={{ mr: "10px", fontWeight: "bold" }}
+                    variant="subtitle1"
+                  >
+                    대행비
+                  </Typography>
+                  <Typography variant="subtitle1">{charge}원</Typography>
+                </TypoBox>
+                <Typography variant="subtitle1" color="text.secondary">
+                  {timeAgo}
+                </Typography>
+              </TypoBox>
+            </CardContent>
+          </Card>
         </Content>
-      </Card>
-      {/* <Container>
-        <Picture>
-          <img alt="tmp_img" src={tmpImg} width="50%" height="50%" />
-        </Picture>
-        <Content>
-          <Medium>심부름 대행합니다.</Medium>
-          <Light>충남 천안시 동남구</Light>
-          <Bottom>
-            <Medium>5000원</Medium>
-            <Light sx={{ ml: "160px" }}>12분 전</Light>
-          </Bottom>
-        </Content>
-      </Container> */}
+      </Box>
     </>
   );
 };

@@ -3,7 +3,7 @@ import { Box, styled } from "@mui/material";
 export const Container = styled(Box)((p) => ({
   marginTop: "20px",
   width: "100%",
-  height: "1500px",
+  height: "100%",
   display: "flex",
   alignItems: "center",
   flexDirection: "column",
