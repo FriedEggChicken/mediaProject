@@ -227,7 +227,7 @@ const Main = () => {
               sx={{
                 position: "absolute",
 
-                top: "500px",
+                top: "570px",
                 height: "100%",
                 left: 0,
                 right: 0,
